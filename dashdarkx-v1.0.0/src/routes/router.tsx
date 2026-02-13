@@ -1,16 +1,22 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Suspense, lazy } from 'react';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
-import paths, { rootPaths } from './paths';
+import paths from './paths';
 import MainLayout from 'layouts/main-layout';
-import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loading/Splash';
 import PageLoader from 'components/loading/PageLoader';
 
-const App = lazy(() => import('App'));
+// 1. Dashboard Import
 const Dashboard = lazy(() => import('pages/dashboard'));
-const Login = lazy(() => import('pages/authentication/Login'));
-const Signup = lazy(() => import('pages/authentication/Signup'));
+
+// 2. Integration Imports
+const GoogleSheets = lazy(() => import('pages/integrations/GoogleSheets'));
+
+// 3. AI Configuration Imports
+const AiSettings = lazy(() => import('pages/ai-configuration/AiSettings'));
+
+// Fallback App Component
+const App = lazy(() => import('App'));
 
 const router = createBrowserRouter(
   [
@@ -35,31 +41,37 @@ const router = createBrowserRouter(
               index: true,
               element: <Dashboard />,
             },
-          ],
-        },
-        {
-          path: rootPaths.authRoot,
-          element: (
-            <AuthLayout>
-              <Outlet />
-            </AuthLayout>
-          ),
-          children: [
+            // --- FLOCHAT INTEGRATIONS ---
             {
-              path: paths.login,
-              element: <Login />,
+              path: paths.integrations.googleSheets,
+              element: <GoogleSheets />,
             },
             {
-              path: paths.signup,
-              element: <Signup />,
+              path: paths.integrations.drive,
+              element: <GoogleSheets />, // Placeholder until Drive page is built
+            },
+            // --- FLOCHAT AI SETTINGS ---
+            {
+              path: paths.ai.prompt,
+              element: <AiSettings />,
+            },
+            {
+              path: paths.ai.apiKeys,
+              element: <AiSettings />, // Placeholder until API Key page is built
             },
           ],
         },
       ],
     },
+    {
+      path: '*',
+      element: <Dashboard />,
+    },
   ],
   {
-    basename: '/dashdarkX',
+    // IMPORTANT: If running on localhost, change this to '/'
+    // If deploying to a specific folder (like GitHub Pages), keep '/dashdarkX'
+    basename: '/dashdarkX', 
   },
 );
 
