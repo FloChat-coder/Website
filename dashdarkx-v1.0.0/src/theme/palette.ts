@@ -50,16 +50,27 @@ declare module '@mui/material/styles' {
 }
 
 const palette: PaletteOptions = {
+  // --- KEY UPDATE: Background Colors ---
+  background: {
+    default: grey[900], // #000000
+    paper: grey[800],   // #262525
+  },
+  // ------------------------------------
+  
+  // --- KEY UPDATE: Primary Brand Color ---
+  primary: {
+    main: purple[400], // #8C52FF (GlobalBank Neon)
+    dark: purple[600],
+    lighter: purple[100],
+  },
+  // -------------------------------------
+
   neutral: {
     lighter: grey[100],
     light: grey[200],
     main: grey[300],
     dark: grey[400],
     darker: grey[600],
-  },
-  primary: {
-    main: purple[500],
-    dark: purple[800],
   },
   secondary: {
     lighter: blue[200],
@@ -89,7 +100,7 @@ const palette: PaletteOptions = {
   },
   gradients: {
     primary: {
-      main: purple[500],
+      main: purple[400],
       state: violate[600],
     },
   },

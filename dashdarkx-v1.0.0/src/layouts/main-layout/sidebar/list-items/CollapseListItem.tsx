@@ -8,45 +8,71 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import IconifyIcon from 'components/base/IconifyIcon';
 
-const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
-  const [open, setOpen] = useState(false);
+interface CollapseListItemProps extends MenuItem {
+  open: boolean;
+}
+
+const CollapseListItem = ({ subheader, active, items, icon, open }: CollapseListItemProps) => {
+  const [expanded, setExpanded] = useState(false);
 
   const handleClick = () => {
-    setOpen(!open);
+    setExpanded(!expanded);
   };
 
   return (
     <>
-      <ListItemButton onClick={handleClick}>
-        <ListItemIcon>
+      <ListItemButton 
+        onClick={handleClick}
+        sx={{
+          justifyContent: open ? 'initial' : 'center',
+          px: 2.5,
+        }}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            mr: open ? 3 : 'auto',
+            justifyContent: 'center',
+          }}
+        >
           {icon && (
             <IconifyIcon
               icon={icon}
               sx={{
                 color: active ? 'primary.main' : null,
+                fontSize: 24
               }}
             />
           )}
         </ListItemIcon>
+        
+        {/* Hide Text if Closed */}
         <ListItemText
           primary={subheader}
           sx={{
+            opacity: open ? 1 : 0,
+            display: open ? 'block' : 'none',
             '& .MuiListItemText-primary': {
               color: active ? 'primary.main' : null,
             },
           }}
         />
-        <IconifyIcon
-          icon="iconamoon:arrow-right-2-duotone"
-          color="neutral.dark"
-          sx={{
-            transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
-            transition: 'transform 0.2s ease-in-out',
-          }}
-        />
+        
+        {/* Hide Arrow if Closed */}
+        {open && (
+          <IconifyIcon
+            icon="iconamoon:arrow-right-2-duotone"
+            color="neutral.dark"
+            sx={{
+              transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s ease-in-out',
+            }}
+          />
+        )}
       </ListItemButton>
 
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      {/* Only render sub-menu if Sidebar is Open AND Item is Expanded */}
+      <Collapse in={open && expanded} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {items?.map((route) => {
             return (
@@ -55,7 +81,7 @@ const CollapseListItem = ({ subheader, active, items, icon }: MenuItem) => {
                 component={Link}
                 href={route.path}
                 sx={{
-                  pl: 1.75,
+                  pl: 9, // Indent for sub-items
                   borderLeft: 4,
                   borderStyle: 'solid',
                   borderColor: route.active ? 'primary.main' : 'transparent !important',

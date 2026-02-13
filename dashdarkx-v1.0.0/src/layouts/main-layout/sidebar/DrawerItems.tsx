@@ -16,7 +16,11 @@ import ListItem from './list-items/ListItem';
 import LogoImg from 'assets/images/Logo.png';
 import { topListData, bottomListData, profileListData } from 'data/sidebarListData';
 
-const DrawerItems = () => {
+interface DrawerItemsProps {
+  open: boolean;
+}
+
+const DrawerItems = ({ open }: DrawerItemsProps) => {
   return (
     <>
       <Stack
@@ -26,72 +30,79 @@ const DrawerItems = () => {
         position={'sticky'}
         top={0}
         bgcolor="info.darker"
-        alignItems="center"
-        justifyContent="flex-start"
+        alignItems={open ? "flex-start" : "center"} // Center logo when collapsed
+        justifyContent="center"
         zIndex={1000}
       >
         <ButtonBase component={Link} href="/" disableRipple>
-          <Image src={LogoImg} alt="logo" height={24} width={24} sx={{ mr: 1 }} />
-          <Typography variant="h5" color="text.primary" fontWeight={600} letterSpacing={1}>
-            FloChat
-          </Typography>
+          <Image src={LogoImg} alt="logo" height={32} width={32} sx={{ mr: open ? 1 : 0 }} />
+          {/* Hide Text if closed */}
+          {open && (
+            <Typography variant="h5" color="text.primary" fontWeight={600} letterSpacing={1}>
+              FloChat
+            </Typography>
+          )}
         </ButtonBase>
       </Stack>
 
-      <Box px={3.5} pb={3} pt={1}>
-        <TextField
-          variant="filled"
-          placeholder="Search..."
-          sx={{ width: 1 }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <IconifyIcon icon={'mingcute:search-line'} />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
+      {/* Hide Search Bar if closed to avoid ugly clipping */}
+      {open && (
+        <Box px={3.5} pb={3} pt={1}>
+          <TextField
+            variant="filled"
+            placeholder="Search..."
+            sx={{ width: 1 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconifyIcon icon={'mingcute:search-line'} />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+      )}
 
-      {/* --- FIX IS HERE: Check for Dropdowns in Top List --- */}
       <List component="nav" sx={{ px: 2.5 }}>
         {topListData.map((route, index) => {
           if (route.items && route.items.length > 0) {
-            return <CollapseListItem key={route.id || index} {...route} />;
+            return <CollapseListItem key={route.id || index} {...route} open={open} />;
           }
-          return <ListItem key={route.id || index} {...route} />;
+          return <ListItem key={route.id || index} {...route} open={open} />;
         })}
       </List>
-      {/* --------------------------------------------------- */}
 
       <Divider />
 
       <List component="nav" sx={{ px: 2.5 }}>
         {bottomListData.map((route, index) => {
-          if (route.items) {
-            return <CollapseListItem key={route.id || index} {...route} />;
+          if (route.items && route.items.length > 0) {
+            return <CollapseListItem key={route.id || index} {...route} open={open} />;
           }
-          return <ListItem key={route.id || index} {...route} />;
+          return <ListItem key={route.id || index} {...route} open={open} />;
         })}
       </List>
 
       <List component="nav" sx={{ px: 2.5 }}>
-        {profileListData && <ProfileListItem {...profileListData} />}
+        {profileListData && <ProfileListItem {...profileListData} open={open} />}
       </List>
 
-      <Box px={3.5} py={6} width={1}>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          href="https://flochat.com/docs" 
-          target="_blank"
-          endIcon={<IconifyIcon icon="mingcute:arrow-right-line" />}
-          sx={{ width: 1 }}
-        >
-          Documentation
-        </Button>
-      </Box>
+      {/* Hide Documentation Button if closed */}
+      {open && (
+        <Box px={3.5} py={6} width={1}>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            href="https://flochat.com/docs" 
+            target="_blank"
+            endIcon={<IconifyIcon icon="mingcute:arrow-right-line" />}
+            sx={{ width: 1 }}
+          >
+            Documentation
+          </Button>
+        </Box>
+      )}
     </>
   );
 };
