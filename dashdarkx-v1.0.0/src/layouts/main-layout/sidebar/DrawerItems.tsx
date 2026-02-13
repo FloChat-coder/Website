@@ -33,7 +33,7 @@ const DrawerItems = () => {
         <ButtonBase component={Link} href="/" disableRipple>
           <Image src={LogoImg} alt="logo" height={24} width={24} sx={{ mr: 1 }} />
           <Typography variant="h5" color="text.primary" fontWeight={600} letterSpacing={1}>
-            Dashdark X
+            FloChat
           </Typography>
         </ButtonBase>
       </Stack>
@@ -41,7 +41,7 @@ const DrawerItems = () => {
       <Box px={3.5} pb={3} pt={1}>
         <TextField
           variant="filled"
-          placeholder="Search for..."
+          placeholder="Search..."
           sx={{ width: 1 }}
           InputProps={{
             startAdornment: (
@@ -53,20 +53,27 @@ const DrawerItems = () => {
         />
       </Box>
 
+      {/* --- THE FIX IS HERE --- */}
       <List component="nav" sx={{ px: 2.5 }}>
         {topListData.map((route, index) => {
-          return <ListItem key={index} {...route} />;
+          // If the item has a sub-menu (items), render the Collapsible component
+          if (route.items) {
+            return <CollapseListItem key={route.id || index} {...route} />;
+          }
+          // Otherwise, render the standard Link component
+          return <ListItem key={route.id || index} {...route} />;
         })}
       </List>
+      {/* ----------------------- */}
 
       <Divider />
 
       <List component="nav" sx={{ px: 2.5 }}>
-        {bottomListData.map((route) => {
+        {bottomListData.map((route, index) => {
           if (route.items) {
-            return <CollapseListItem key={route.id} {...route} />;
+            return <CollapseListItem key={route.id || index} {...route} />;
           }
-          return <ListItem key={route.id} {...route} />;
+          return <ListItem key={route.id || index} {...route} />;
         })}
       </List>
 
@@ -79,10 +86,12 @@ const DrawerItems = () => {
           variant="contained"
           color="primary"
           size="large"
+          href="https://flochat.com/docs"
+          target="_blank"
           endIcon={<IconifyIcon icon="mingcute:arrow-right-line" />}
           sx={{ width: 1 }}
         >
-          Get template
+          Documentation
         </Button>
       </Box>
     </>
