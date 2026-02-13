@@ -2,18 +2,23 @@ import sitemap from 'routes/sitemap';
 
 export const topListData = sitemap.filter((item) => {
   const id = item.id;
-  // Keep everything in the top list EXCEPT 'settings'
-  if (id === 'settings') {
-    return false;
+  if (
+    id === 'template-pages' ||
+    id === 'settings' ||
+    id === 'account-settings' ||
+    id === 'authentication'
+  ) {
+    return null;
   }
-  return true;
+  return item;
 });
 
-// FIX: Removed 'item' argument since it wasn't being used
-export const bottomListData = sitemap.filter(() => {
-  // Currently empty, but you can add 'help' or 'logout' here later
-  return false;
+export const bottomListData = sitemap.filter((item) => {
+  const id = item.id;
+  if (id === 'template-pages' || id === 'settings' || id === 'authentication') {
+    return item;
+  }
+  return null;
 });
 
-// This MUST match the ID used in sitemap.ts
-export const profileListData = sitemap.find((item) => item.id === 'settings');
+export const profileListData = sitemap.find((item) => item.id === 'account-settings');

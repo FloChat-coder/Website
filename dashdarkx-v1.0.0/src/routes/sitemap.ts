@@ -5,6 +5,7 @@ export interface SubMenuItem {
   pathName: string;
   path: string;
   active?: boolean;
+  items?: SubMenuItem[];
 }
 
 export interface MenuItem {
@@ -26,58 +27,63 @@ const sitemap: MenuItem[] = [
     active: true,
   },
   {
+    id: 'features',
+    subheader: 'Features',
+    path: '#!',
+    icon: 'mingcute:star-fill',
+  },
+  {
+    id: 'users',
+    subheader: 'Users',
+    path: '#!',
+    icon: 'mingcute:user-2-fill',
+  },
+  {
+    id: 'pricing',
+    subheader: 'Pricing',
+    path: '#!',
+    icon: 'mingcute:currency-dollar-2-line',
+  },
+  {
     id: 'integrations',
     subheader: 'Integrations',
-    path: '#!', // Fallback path prevents crash if logic fails
+    path: '#!',
     icon: 'mingcute:plugin-2-fill',
+  },
+  {
+    id: 'authentication',
+    subheader: 'Authentication',
+    icon: 'mingcute:safe-lock-fill',
     items: [
       {
-        name: 'Google Sheets',
-        pathName: 'google-sheets',
-        path: paths.integrations.googleSheets,
+        name: 'Login',
+        pathName: 'login',
+        path: paths.login,
       },
       {
-        name: 'Drive & Docs',
-        pathName: 'drive-docs',
-        path: paths.integrations.drive,
+        name: 'Signup',
+        pathName: 'signup',
+        path: paths.signup,
       },
     ],
   },
   {
-    id: 'ai-settings',
-    subheader: 'AI Configuration',
-    path: '#!',
-    icon: 'mingcute:ai-fill',
-    items: [
-      {
-        name: 'System Prompt',
-        pathName: 'system-prompt',
-        path: paths.ai.prompt,
-      },
-      {
-        name: 'API Keys',
-        pathName: 'api-keys',
-        path: paths.ai.apiKeys,
-      },
-    ],
-  },
-  {
-    id: 'leads',
-    subheader: 'Leads & Chats',
-    path: '#!',
-    icon: 'mingcute:chat-4-fill',
-  },
-  {
-    id: 'widget',
-    subheader: 'Widget Design',
-    path: '#!',
-    icon: 'mingcute:palette-fill',
-  },
-  {
-    id: 'settings', // Matches logic in sidebarListData.ts
-    subheader: 'Account Settings',
+    id: 'settings',
+    subheader: 'Settings',
     path: '#!',
     icon: 'material-symbols:settings-rounded',
+    active: true,
+  },
+  {
+    id: 'template-pages',
+    subheader: 'Template pages',
+    path: '#!',
+    icon: 'mingcute:document-2-fill',
+  },
+  {
+    id: 'account-settings',
+    subheader: 'John Carter',
+    path: '#!',
   },
 ];
 

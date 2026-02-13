@@ -4,35 +4,35 @@ import TopCard from './TopCard';
 const cardsData = [
   {
     id: 1,
-    title: 'Total Conversations',
-    value: '1,245',
-    rate: '12.5%',
+    title: 'Save Products',
+    value: '50.8K',
+    rate: '28.4%',
     isUp: true,
-    icon: 'mingcute:chat-4-fill', // Chat icon
+    icon: 'carbon:favorite-filled',
   },
   {
     id: 2,
-    title: 'Leads Captured',
-    value: '342',
-    rate: '8.2%',
-    isUp: true,
-    icon: 'mingcute:user-add-fill', // User add icon
+    title: 'Stock Products',
+    value: '23.6K',
+    rate: '12.6%',
+    isUp: false,
+    icon: 'solar:bag-bold',
   },
   {
     id: 3,
-    title: 'Active Bots',
-    value: '3',
-    rate: '0%',
-    isUp: false,
-    icon: 'mingcute:robot-fill', // Robot icon
+    title: 'Sale Products',
+    value: '756',
+    rate: '3.1%',
+    isUp: true,
+    icon: 'ph:bag-simple-fill',
   },
   {
     id: 4,
-    title: 'API Usage (Tokens)',
-    value: '450K',
-    rate: '5.3%',
+    title: 'Average Revenue',
+    value: '2.3K',
+    rate: '11.3%',
     isUp: true,
-    icon: 'mingcute:lightning-fill', // Usage icon
+    icon: 'mingcute:currency-dollar-2-line',
   },
 ];
 

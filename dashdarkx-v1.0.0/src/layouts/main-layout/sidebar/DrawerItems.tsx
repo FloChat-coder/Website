@@ -33,7 +33,7 @@ const DrawerItems = () => {
         <ButtonBase component={Link} href="/" disableRipple>
           <Image src={LogoImg} alt="logo" height={24} width={24} sx={{ mr: 1 }} />
           <Typography variant="h5" color="text.primary" fontWeight={600} letterSpacing={1}>
-            FloChat
+            Dashdark X
           </Typography>
         </ButtonBase>
       </Stack>
@@ -41,7 +41,7 @@ const DrawerItems = () => {
       <Box px={3.5} pb={3} pt={1}>
         <TextField
           variant="filled"
-          placeholder="Search..."
+          placeholder="Search for..."
           sx={{ width: 1 }}
           InputProps={{
             startAdornment: (
@@ -53,27 +53,20 @@ const DrawerItems = () => {
         />
       </Box>
 
-      {/* --- THIS SECTION FIXES THE CRASH --- */}
       <List component="nav" sx={{ px: 2.5 }}>
         {topListData.map((route, index) => {
-          // If the item has children (sub-menu), use CollapseListItem
-          if (route.items && route.items.length > 0) {
-            return <CollapseListItem key={route.id || index} {...route} />;
-          }
-          // Otherwise, use standard ListItem
-          return <ListItem key={route.id || index} {...route} />;
+          return <ListItem key={index} {...route} />;
         })}
       </List>
-      {/* ------------------------------------ */}
 
       <Divider />
 
       <List component="nav" sx={{ px: 2.5 }}>
-        {bottomListData.map((route, index) => {
-          if (route.items && route.items.length > 0) {
-            return <CollapseListItem key={route.id || index} {...route} />;
+        {bottomListData.map((route) => {
+          if (route.items) {
+            return <CollapseListItem key={route.id} {...route} />;
           }
-          return <ListItem key={route.id || index} {...route} />;
+          return <ListItem key={route.id} {...route} />;
         })}
       </List>
 
@@ -86,12 +79,10 @@ const DrawerItems = () => {
           variant="contained"
           color="primary"
           size="large"
-          href="https://flochat.com/docs"
-          target="_blank"
           endIcon={<IconifyIcon icon="mingcute:arrow-right-line" />}
           sx={{ width: 1 }}
         >
-          Documentation
+          Get template
         </Button>
       </Box>
     </>

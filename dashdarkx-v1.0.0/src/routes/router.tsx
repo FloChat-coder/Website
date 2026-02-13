@@ -1,16 +1,16 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Suspense, lazy } from 'react';
 import { Outlet, createBrowserRouter } from 'react-router-dom';
-import paths from './paths';
+import paths, { rootPaths } from './paths';
 import MainLayout from 'layouts/main-layout';
+import AuthLayout from 'layouts/auth-layout';
 import Splash from 'components/loading/Splash';
 import PageLoader from 'components/loading/PageLoader';
 
 const App = lazy(() => import('App'));
 const Dashboard = lazy(() => import('pages/dashboard'));
-
-// Internal App Pages
-const GoogleSheets = lazy(() => import('pages/integrations/GoogleSheets'));
-const AiSettings = lazy(() => import('pages/ai-configuration/AiSettings'));
+const Login = lazy(() => import('pages/authentication/Login'));
+const Signup = lazy(() => import('pages/authentication/Signup'));
 
 const router = createBrowserRouter(
   [
@@ -35,29 +35,31 @@ const router = createBrowserRouter(
               index: true,
               element: <Dashboard />,
             },
+          ],
+        },
+        {
+          path: rootPaths.authRoot,
+          element: (
+            <AuthLayout>
+              <Outlet />
+            </AuthLayout>
+          ),
+          children: [
             {
-              path: paths.integrations.googleSheets,
-              element: <GoogleSheets />,
+              path: paths.login,
+              element: <Login />,
             },
             {
-              path: paths.ai.prompt,
-              element: <AiSettings />,
-            },
-            {
-              path: paths.ai.apiKeys,
-              element: <AiSettings />, 
+              path: paths.signup,
+              element: <Signup />,
             },
           ],
         },
       ],
     },
-    {
-      path: '*',
-      element: <Dashboard />, 
-    },
   ],
   {
-    basename: '/', 
+    basename: '/dashdarkX',
   },
 );
 
