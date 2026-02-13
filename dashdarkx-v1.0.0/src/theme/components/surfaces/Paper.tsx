@@ -5,12 +5,12 @@ const Paper: Components<Omit<Theme, 'components'>>['MuiPaper'] = {
   styleOverrides: {
     root: ({ theme }) => ({
       padding: theme.spacing(3.5),
-      backgroundColor: theme.palette.info.main,
-      boxShadow: theme.customShadows[0],
-      borderRadius: theme.shape.borderRadius * 3,
-
-      '&.MuiMenu-paper': {
-        padding: theme.spacing(1),
+      // FIX: Changed from theme.palette.info.main to theme.palette.background.paper
+      backgroundColor: theme.palette.background.paper, 
+      boxShadow: theme.shadows[0], // Optional: Removes shadow for a flat look
+      borderRadius: 16, // Keeps the nice rounded corners
+      '&.MuiPaper-elevation0': {
+        boxShadow: 'none',
       },
     }),
   },

@@ -1,3 +1,4 @@
+// src/theme/palette.ts
 import { PaletteColorOptions, PaletteOptions } from '@mui/material/styles';
 import {
   grey,
@@ -17,53 +18,39 @@ import {
 declare module '@mui/material/styles' {
   interface PaletteOptions {
     neutral?: PaletteColorOptions;
-    transparent?: {
-      success: PaletteColorOptions;
-      warning: PaletteColorOptions;
-      error: PaletteColorOptions;
-    };
-    gradients?: {
-      primary: PaletteColorOptions;
-    };
+    transparent?: { success: PaletteColorOptions; warning: PaletteColorOptions; error: PaletteColorOptions; };
+    gradients?: { primary: PaletteColorOptions; };
   }
-  interface SimplePaletteColorOptions {
-    lighter?: string;
-    darker?: string;
-    state?: string;
-  }
+  interface SimplePaletteColorOptions { lighter?: string; darker?: string; state?: string; }
   interface Palette {
     neutral: PaletteColor;
-    gradients: {
-      primary: PaletteColor;
-    };
-    transparent: {
-      success: PaletteColor;
-      warning: PaletteColor;
-      error: PaletteColor;
-    };
+    gradients: { primary: PaletteColor; };
+    transparent: { success: PaletteColor; warning: PaletteColor; error: PaletteColor; };
   }
-  interface PaletteColor {
-    lighter: string;
-    darker: string;
-    state: string;
-  }
+  interface PaletteColor { lighter: string; darker: string; state: string; }
 }
 
 const palette: PaletteOptions = {
-  // --- KEY UPDATE: Background Colors ---
+  // --- THIS IS THE KEY PART ---
+  mode: 'dark', // Tells MUI components to use dark mode logic
   background: {
     default: grey[900], // #000000
     paper: grey[800],   // #262525
   },
-  // ------------------------------------
-  
-  // --- KEY UPDATE: Primary Brand Color ---
+  // ----------------------------
+
   primary: {
-    main: purple[400], // #8C52FF (GlobalBank Neon)
+    main: purple[400], // GlobalBank Purple
     dark: purple[600],
     lighter: purple[100],
   },
-  // -------------------------------------
+  
+  // We set "info" to dark grey so the sidebar (which uses info.darker) matches the cards
+  info: {
+    main: blue[700],
+    dark: blue[800],
+    darker: grey[900], // Force Sidebar to be Black (matches background)
+  },
 
   neutral: {
     lighter: grey[100],
@@ -79,20 +66,9 @@ const palette: PaletteOptions = {
     dark: cyan[900],
     darker: blue[500],
   },
-  info: {
-    main: blue[700],
-    dark: blue[800],
-    darker: blue[900],
-  },
-  success: {
-    main: green[500],
-  },
-  warning: {
-    main: yellow[500],
-  },
-  error: {
-    main: red[500],
-  },
+  success: { main: green[500] },
+  warning: { main: yellow[500] },
+  error: { main: red[500] },
   text: {
     primary: white[500],
     secondary: grey[300],
@@ -105,15 +81,9 @@ const palette: PaletteOptions = {
     },
   },
   transparent: {
-    success: {
-      main: transparentGreen[500],
-    },
-    warning: {
-      main: transparentYellow[500],
-    },
-    error: {
-      main: transparentRed[500],
-    },
+    success: { main: transparentGreen[500] },
+    warning: { main: transparentYellow[500] },
+    error: { main: transparentRed[500] },
   },
 };
 

@@ -29,7 +29,7 @@ const DrawerItems = ({ open }: DrawerItemsProps) => {
         px={3.5}
         position={'sticky'}
         top={0}
-        bgcolor="info.darker"
+        bgcolor="background.default"
         alignItems={open ? "flex-start" : "center"} // Center logo when collapsed
         justifyContent="center"
         zIndex={1000}

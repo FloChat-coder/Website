@@ -1,24 +1,21 @@
-/* google fonts */
+/* src/index.css */
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap'); /* GlobalBank Font */
+@import url('https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,500,600,700&display=swap');
 
 :root {
-  /* GlobalBank Brand Colors */
-  --color-green-400: #8c52ff;
-  --color-green-500: #7c3aed;
-  
-  /* Scrollbar Styles */
+  --color-purple: #8c52ff;
   --scrollbar-width: 6px;
   --scrollbar-track: transparent;
   --scrollbar-thumb: #343B4F;
   --scrollbar-thumb-hover: #4A5568;
 }
 
+/* FORCE BLACK BACKGROUND */
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #000000; /* Fallback Force Black */
+  background-color: #000000 !important; /* !important overrides everything else */
   color: #ffffff;
   font-family: 'Work Sans', 'Clash Grotesk', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,36 +27,20 @@ body {
   width: var(--scrollbar-width);
   height: var(--scrollbar-width);
 }
-
 ::-webkit-scrollbar-track {
   background: var(--scrollbar-track);
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-thumb-hover);
 }
 
-/* GlobalBank Animations */
-@keyframes slow-pan {
-  0% { transform: scale(1.1) translate(0%, 0%); }
-  50% { transform: scale(1.1) translate(-2%, -2%); }
-  100% { transform: scale(1.1) translate(0%, 0%); }
-}
-
-.animate-pan {
-  animation: slow-pan 20s infinite ease-in-out;
-}
-
-/* External Fonts (Mona Sans - Original Template) */
 @font-face {
   font-family: 'Mona Sans';
-  src:
-    url('./assets/fonts/mona-sans/WOFF-2/MonaSans-Regular.woff2') format('woff2');
+  src: url('./assets/fonts/mona-sans/WOFF-2/MonaSans-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
 }

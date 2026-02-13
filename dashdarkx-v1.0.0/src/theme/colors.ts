@@ -1,4 +1,5 @@
-// Define the new dark scale based on your request
+// src/theme/colors.ts
+
 export const grey = {
   50: '#F7FAFC',
   100: '#D9E1FA',
@@ -8,17 +9,17 @@ export const grey = {
   500: '#4A5568',
   600: '#343B4F',
   700: '#2D3748',
-  800: '#262525', // Your requested Card Color
-  900: '#000000', // Your requested Background Color (Pure Black)
+  800: '#262525', // <--- YOUR CARD COLOR (Dark Grey)
+  900: '#000000', // <--- YOUR BACKGROUND COLOR (Pure Black)
 };
 
-// GlobalBank's Neon Purple Palette (Derived from your CSS)
+// GlobalBank Neon Purple (Added this back for your branding)
 export const purple = {
   50: '#FBF7FF',
   100: '#F2EAFF',
   200: '#E4D4FF',
   300: '#D0B0FF',
-  400: '#8C52FF', // Main Neon Purple
+  400: '#8C52FF', // Primary Neon
   500: '#7C3AED',
   600: '#6D28D9',
   700: '#5B21B6',
@@ -26,7 +27,7 @@ export const purple = {
   900: '#2E1065',
 };
 
-// Keep existing colors to prevent crashes
+// ... Keep the rest exactly as they were ...
 export const red = {
   50: '#FFE5E7',
   100: '#FFBCC0',
@@ -90,6 +91,19 @@ export const violate = {
   700: '#7E22EE',
   800: '#7217E9',
   900: '#660DE4',
+};
+
+export const indigo = {
+  50: '#C4A4FF',
+  100: '#B487FF',
+  200: '#9E68FF',
+  300: '#A972FF',
+  400: '#9160FF',
+  500: '#8951FF',
+  600: '#8257FF',
+  700: '#7A4FFF',
+  800: '#7147FF',
+  900: '#673FFF',
 };
 
 export const yellow = {
