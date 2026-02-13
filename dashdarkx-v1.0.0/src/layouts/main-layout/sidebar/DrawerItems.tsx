@@ -53,24 +53,24 @@ const DrawerItems = () => {
         />
       </Box>
 
-      {/* --- THE FIX IS HERE --- */}
+      {/* --- THIS SECTION FIXES THE CRASH --- */}
       <List component="nav" sx={{ px: 2.5 }}>
         {topListData.map((route, index) => {
-          // If the item has a sub-menu (items), render the Collapsible component
-          if (route.items) {
+          // If the item has children (sub-menu), use CollapseListItem
+          if (route.items && route.items.length > 0) {
             return <CollapseListItem key={route.id || index} {...route} />;
           }
-          // Otherwise, render the standard Link component
+          // Otherwise, use standard ListItem
           return <ListItem key={route.id || index} {...route} />;
         })}
       </List>
-      {/* ----------------------- */}
+      {/* ------------------------------------ */}
 
       <Divider />
 
       <List component="nav" sx={{ px: 2.5 }}>
         {bottomListData.map((route, index) => {
-          if (route.items) {
+          if (route.items && route.items.length > 0) {
             return <CollapseListItem key={route.id || index} {...route} />;
           }
           return <ListItem key={route.id || index} {...route} />;

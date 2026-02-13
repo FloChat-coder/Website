@@ -1,23 +1,19 @@
 import sitemap from 'routes/sitemap';
 
-// 1. Top List: Keeps everything EXCEPT the settings/profile item
 export const topListData = sitemap.filter((item) => {
   const id = item.id;
-  // We exclude 'settings' because it goes to the bottom profile section
-  if (id === 'settings' || id === 'authentication') {
+  // Keep everything in the top list EXCEPT 'settings'
+  if (id === 'settings') {
     return false;
   }
   return true;
 });
 
-// 2. Bottom List: (Optional) Any extra links like "Help" or "Logout"
-export const bottomListData = sitemap.filter((item) => {
-  const id = item.id;
-  if (id === 'authentication') {
-    return true;
-  }
+// FIX: Removed 'item' argument since it wasn't being used
+export const bottomListData = sitemap.filter(() => {
+  // Currently empty, but you can add 'help' or 'logout' here later
   return false;
 });
 
-// 3. Profile Item: MUST match the ID 'settings' from your sitemap.ts
+// This MUST match the ID used in sitemap.ts
 export const profileListData = sitemap.find((item) => item.id === 'settings');
